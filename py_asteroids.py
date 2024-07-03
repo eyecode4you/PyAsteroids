@@ -12,14 +12,12 @@ def wrap_position(position, screen):
     w, h = screen.get_size()
     return Vector2(x % w, y % h)
 
-
 def blit_rotated(position, image, forward, screen):
     angle = forward.angle_to(Vector2(0, -1))
     rotated_surface = rotozoom(image, angle, 1.0)
     rotated_surface_size = Vector2(rotated_surface.get_size())
     blit_position = position - rotated_surface_size // 2
     screen.blit(rotated_surface, blit_position)
-
 
 class Ship:
     def __init__(self, position):
@@ -62,7 +60,6 @@ class Ship:
         self.position = wrap_position(self.position, screen)
         blit_rotated(self.position, self.image, self.forward, screen)
 
-
 class Bullet:
     def __init__(self, position, velocity):
         self.position = position
@@ -73,7 +70,6 @@ class Bullet:
 
     def draw(self, screen):
         pygame.draw.rect(screen, (0, 255, 0), [self.position.x, self.position.y, 5, 5])
-
 
 class Asteroid:
     def __init__(self, position, size):
@@ -97,13 +93,8 @@ class Asteroid:
             return True
         return False
 
-
 def main():
     pygame.init()
-    pygame.mixer.music.load("./resources/bgmusic.mp3")
-    pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(0.25)
-
     screen = pygame.display.set_mode((800, 800))
     pygame.display.set_caption("pyAsteroids")
 
